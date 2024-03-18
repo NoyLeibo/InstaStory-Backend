@@ -1,4 +1,4 @@
 export default {
-    dbURL: 'mongodb+srv://theUser:thePass@cluster0-klgzh.mongodb.net/test?retryWrites=true&w=majority',
-    dbName: 'tester_db',
+    dbURL: "mongodb+srv://noy:nmKIitREbXaPY8TM@cluster0.jdno0ss.mongodb.net/?retryWrites=true&w=majority",
+    dbName: "instastory_db",
 }
