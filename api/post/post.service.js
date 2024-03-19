@@ -21,15 +21,7 @@ async function query(filterBy = { txt: '' }) {
         // }
         const collection = await dbService.getCollection('post')
         var postsToReturn = await collection.find({}).toArray()
-        // if (filterBy.inStock === 'true') {
-        //     postsToReturn = postsToReturn.filter(post => post.inStock)
-        // }
-        // else if (filterBy.inStock === 'false') {
-        //     postsToReturn = postsToReturn.filter(post => !post.inStock)
-        // }
-        // if (filterBy.label.length) {
-        //     postsToReturn = postsToReturn.filter(post => filterBy.label.some(label => post.labels.includes(label)))
-        // }
+        postsToReturn = postsToReturn.sort((postA, postB) => new Date(postB.createdAt).getTime() - new Date(postA.createdAt).getTime())
         return (postsToReturn)
     } catch (err) {
         logger.error('cannot find posts', err)
@@ -88,10 +80,11 @@ async function update(post) {
         );
         return post;
     } catch (err) {
-        loggerService.error(`cannot update post ${post._id}`, err);
+        logger.error(`cannot update post ${post._id}`, err);
         throw err;
     }
 }
+
 
 async function addPostMsg(postId, msg) {
     try {
