@@ -48,6 +48,8 @@ export async function addPost(req, res) {
 export async function updatePost(req, res) {
     try {
         const post = req.body
+        // logger.debug(post)
+
         const updatedPost = await postService.update(post)
         res.json(updatedPost)
     } catch (err) {

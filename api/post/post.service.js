@@ -72,15 +72,24 @@ async function add(post) {
 async function update(post) {
     try {
         const postToSave = {
-            vendor: post.vendor,
-            price: post.price
-        }
-        const collection = await dbService.getCollection('post')
-        await collection.updateOne({ _id: new ObjectId(post._id) }, { $set: postToSave })
-        return post
+            createdAt: post.createdAt,
+            txt: post.txt,
+            imgUrl: post.imgUrl,
+            by: post.by,
+            loc: post.loc,
+            comments: post.comments,
+            likedBy: post.likedBy,
+            tags: post.tags,
+        };
+        const collection = await dbService.getCollection("post");
+        await collection.updateOne(
+            { _id: new ObjectId(post._id) },
+            { $set: postToSave }
+        );
+        return post;
     } catch (err) {
-        logger.error(`cannot update post ${post._id}`, err)
-        throw err
+        loggerService.error(`cannot update post ${post._id}`, err);
+        throw err;
     }
 }
 

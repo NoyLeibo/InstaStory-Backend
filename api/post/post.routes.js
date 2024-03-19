@@ -12,7 +12,7 @@ export const postRoutes = express.Router()
 postRoutes.get('/', log, getPosts)
 postRoutes.get('/:id', getPostById)
 postRoutes.post('/', requireAuth, addPost)
-postRoutes.put('/:id', requireAuth, updatePost)
+postRoutes.put('/', requireAuth, updatePost)
 postRoutes.delete('/:id', requireAuth, removePost)
 
 postRoutes.post('/:id/msg', requireAuth, addPostMsg)
