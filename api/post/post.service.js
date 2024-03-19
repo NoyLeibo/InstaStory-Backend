@@ -21,15 +21,15 @@ async function query(filterBy = { txt: '' }) {
         // }
         const collection = await dbService.getCollection('post')
         var postsToReturn = await collection.find({}).toArray()
-        if (filterBy.inStock === 'true') {
-            postsToReturn = postsToReturn.filter(post => post.inStock)
-        }
-        else if (filterBy.inStock === 'false') {
-            postsToReturn = postsToReturn.filter(post => !post.inStock)
-        }
-        if (filterBy.label.length) {
-            postsToReturn = postsToReturn.filter(post => filterBy.label.some(label => post.labels.includes(label)))
-        }
+        // if (filterBy.inStock === 'true') {
+        //     postsToReturn = postsToReturn.filter(post => post.inStock)
+        // }
+        // else if (filterBy.inStock === 'false') {
+        //     postsToReturn = postsToReturn.filter(post => !post.inStock)
+        // }
+        // if (filterBy.label.length) {
+        //     postsToReturn = postsToReturn.filter(post => filterBy.label.some(label => post.labels.includes(label)))
+        // }
         return (postsToReturn)
     } catch (err) {
         logger.error('cannot find posts', err)

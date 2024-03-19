@@ -3,16 +3,16 @@ import { postService } from './post.service.js'
 
 export async function getPosts(req, res) {
     try {
-        const filterBy = {
-            inStock: req.query.inStock || '',
-            label: req.query.label || '',
-            price: +req.query.price || 0,
-        }
+        // const filterBy = {
+        //     inStock: req.query.inStock || '',
+        //     label: req.query.label || '',
+        //     price: +req.query.price || 0,
+        // }
         // const filterBy = {
         //     txt: req.query.txt || '',
         // }
-        logger.debug('Getting posts', filterBy)
-        const posts = await postService.query(filterBy)
+        logger.debug('Getting posts with no filter')
+        const posts = await postService.query()
         res.json(posts)
     } catch (err) {
         logger.error('Failed to get posts', err)
