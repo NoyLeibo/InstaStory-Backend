@@ -21,7 +21,7 @@ export async function getPosts(req, res) {
 }
 
 export async function getPostById(req, res) {
-    logger.debug('test')
+    // logger.debug('test')
 
     try {
         const postId = req.params.id
