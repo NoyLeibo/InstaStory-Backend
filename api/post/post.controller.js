@@ -21,8 +21,6 @@ export async function getPosts(req, res) {
 }
 
 export async function getPostById(req, res) {
-    // logger.debug('test')
-
     try {
         const postId = req.params.id
         const post = await postService.getById(postId)
