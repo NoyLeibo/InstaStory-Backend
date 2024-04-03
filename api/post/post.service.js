@@ -14,18 +14,27 @@ export const postService = {
     removePostMsg
 }
 
-async function query(filterBy = { txt: '' }) {
+async function query(filterBy = { usersToLoadPost: [] }) {
     try {
-        // const criteria = {
-        //     name: { $regex: filterBy.inStock, $options: 'i' }
-        // }
-        const collection = await dbService.getCollection('post')
-        var postsToReturn = await collection.find({}).toArray()
-        postsToReturn = postsToReturn.sort((postA, postB) => new Date(postB.createdAt).getTime() - new Date(postA.createdAt).getTime())
-        return (postsToReturn)
+        const collection = await dbService.getCollection('post');
+        // Fetch all posts
+
+        // Sort posts by createdAt in descending order
+
+        // Filter posts by usersToLoadPost if it's not empty
+        logger.debug('filterBy.usersToLoadPost.length', 'X', filterBy.usersToLoadPost.length)
+        if (filterBy.usersToLoadPost) {
+            var posts = await collection.find({}).toArray();
+            posts.sort((postA, postB) => new Date(postB.createdAt).getTime() - new Date(postA.createdAt).getTime());
+            logger.debug(filterBy.usersToLoadPost)
+            const userIdsToLoad = filterBy.usersToLoadPost.map(user => user._id);
+            posts = posts.filter(post => userIdsToLoad.includes(post.by._id));
+            return posts;
+        }
+
     } catch (err) {
-        logger.error('cannot find posts', err)
-        throw err
+        logger.error('cannot find posts', err);
+        throw err;
     }
 }
 

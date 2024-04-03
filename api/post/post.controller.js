@@ -11,8 +11,9 @@ export async function getPosts(req, res) {
         // const filterBy = {
         //     txt: req.query.txt || '',
         // }
-        logger.debug('Getting posts with no filter')
-        const posts = await postService.query()
+        const filterBy = { usersToLoadPost: req.query.usersToLoadPost || '' }
+        logger.debug('Getting posts with filter', filterBy)
+        const posts = await postService.query(filterBy)
         res.json(posts)
     } catch (err) {
         logger.error('Failed to get posts', err)
